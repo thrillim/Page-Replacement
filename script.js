@@ -189,10 +189,10 @@ function visulize(refStringArray, frames, algorithm) {
       pageFrame += `<div class="border-solid border border-primary text-center">${data} <div class="text-xs text-info text-center">${subData}</div></div> `;
     }
     if (isDrawn) {
-      visualPageFrames.innerHTML += `<div><div class="font-bold mb-1">${refStringArray[i]}</div><div class="block ml-[12px] min-w-[24px]">${pageFrame}</div></div> `;
+      visualPageFrames.innerHTML += `<div><div class="font-bold mb-px">${refStringArray[i]}</div><div class="block ml-[12px] min-w-[24px] mb-[10px]">${pageFrame}</div></div> `;
       isDrawn = false;
     } else {
-      visualPageFrames.innerHTML += `<div><div class="font-bold mb-1">${refStringArray[i]}</div><div class="block ml-[12px] min-w-[24px] opacity-0">${pageFrame}</div></div> `;
+      visualPageFrames.innerHTML += `<div><div class="font-bold mb-px">${refStringArray[i]}</div><div class="block ml-[12px] min-w-[24px] mb-[10px] opacity-0">${pageFrame}</div></div> `;
     }
   }
   // Show conclusion
