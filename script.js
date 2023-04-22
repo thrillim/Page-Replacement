@@ -4,12 +4,23 @@ const refString = document.getElementById('ref-string');
 const separator = document.getElementById('separator');
 let refStringArray = refString.value.split(separator.value);
 let frames = parseInt(numOfFrames.value);
+const genRefBtn = document.getElementById('gen-ref');
 
 const visualPageFrames = document.getElementById('visual-page-frames');
 const conclusion = document.getElementById('conclusion');
 
 const frameInfo = document.getElementById('frame-info');
 const frameSubInfo = document.getElementById('frame-sub-info');
+
+// generate a random page-reference string where page numbers range from 0 to 9.
+function generateRefString() {
+  let randomRefString = "";
+  for (let i = 0; i < 20; i++) {
+    randomRefString += Math.floor(Math.random() * 10) + ", ";
+  }
+  randomRefString = randomRefString.slice(0, -2);
+  return randomRefString;
+}
 
 function visulize(refStringArray, frames, algorithm) {
   let pageFaults = 0;
@@ -189,10 +200,10 @@ function visulize(refStringArray, frames, algorithm) {
       pageFrame += `<div class="border-solid border border-primary text-center">${data} <div class="text-xs text-info text-center">${subData}</div></div> `;
     }
     if (isDrawn) {
-      visualPageFrames.innerHTML += `<div><div class="font-bold mb-px">${refStringArray[i]}</div><div class="block ml-[12px] min-w-[24px] mb-[10px]">${pageFrame}</div></div> `;
+      visualPageFrames.innerHTML += `<div><div class="font-bold mb-1">${refStringArray[i]}</div><div class="block ml-[12px] min-w-[24px]">${pageFrame}</div></div> `;
       isDrawn = false;
     } else {
-      visualPageFrames.innerHTML += `<div><div class="font-bold mb-px">${refStringArray[i]}</div><div class="block ml-[12px] min-w-[24px] mb-[10px] opacity-0">${pageFrame}</div></div> `;
+      visualPageFrames.innerHTML += `<div><div class="font-bold mb-1">${refStringArray[i]}</div><div class="block ml-[12px] min-w-[24px] opacity-0">${pageFrame}</div></div> `;
     }
   }
   // Show conclusion
@@ -213,6 +224,12 @@ function distanceRef(reffItemIndex, thisFrameNumber) {
 }
 
 // console.log(distanceRef(0, 0));
+
+genRefBtn.addEventListener('click', () => {
+  refString.value = generateRefString();
+  refStringArray = refString.value.split(separator.value);
+  visulize(refStringArray, frames, algorithm.value);
+})
 
 algorithm.addEventListener('change', () => {
   refStringArray = refString.value.split(separator.value);
